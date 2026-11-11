@@ -1,0 +1,233 @@
+@font-face {
+  font-family: 'MontserratAlt';
+  src: url('../assets/montserrat/MontserratAlternates-Regular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'MontserratAlt';
+  src: url('../assets/montserrat/MontserratAlternates-SemiBold.otf') format('opentype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'MontserratAlt';
+  src: url('../assets/montserrat/MontserratAlternates-Light.otf') format('opentype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'SpaceMono';
+  src: url('../assets/spacemono/SpaceMono-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'SpaceMono';
+  src: url('../assets/spacemono/SpaceMono-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+body {
+  text-align: center;
+  background-color: #0b0b12;
+  color: rgba(245, 245, 255, 0.92);
+  font-family: 'SpaceMono', 'MontserratAlt', ui-monospace, 'Consolas', monospace;
+  font-weight: 400;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  height: 100vh;
+}
+
+/* Video background layer */
+.video-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  background-color: #0b0b12; /* Fallback background */
+  overflow: hidden;
+}
+
+.video-background video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  background-color: #0b0b12;
+  filter: saturate(1.05) contrast(1.05);
+}
+
+/* Clock overlay layer — top-left, the only region the train's glow never reaches */
+.clock-container {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  display: grid;
+  place-items: start start;
+  padding: 4.5vh 0 0 4.5vw;
+  pointer-events: none;
+}
+
+.clock {
+  --dial-size: clamp(140px, 11vw, 190px);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: var(--dial-size);
+  pointer-events: none;
+  text-align: center;
+}
+
+/* Soft radial darkening so the widget keeps its contrast over any crop */
+.clock::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: calc(var(--dial-size) * 2.4);
+  height: calc(var(--dial-size) * 2.9);
+  background: radial-gradient(
+    ellipse at 50% 45%,
+    rgba(4, 10, 28, 0.55) 0%,
+    rgba(4, 10, 28, 0.34) 38%,
+    rgba(4, 10, 28, 0) 72%
+  );
+  pointer-events: none;
+  z-index: -1;
+}
+
+.clock__overline {
+  font-family: 'SpaceMono', ui-monospace, monospace;
+  font-weight: 400;
+  font-size: 9px;
+  letter-spacing: 0.42em;
+  text-transform: uppercase;
+  color: rgba(214, 246, 255, 0.34);
+  margin-bottom: 14px;
+  white-space: nowrap;
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.7);
+}
+
+/* Dial */
+.dial {
+  --minute-delay: 0;
+  --hour-delay: 0;
+  display: block;
+  width: var(--dial-size);
+  height: var(--dial-size);
+  overflow: visible;
+}
+
+.dial__ring {
+  fill: none;
+  stroke: rgba(92, 234, 255, 0.28);
+  stroke-width: 1;
+}
+
+.dial__ticks {
+  filter: drop-shadow(0 0 4px rgba(92, 234, 255, 0.28));
+}
+
+.dial__tick {
+  stroke: rgba(190, 235, 255, 0.28);
+  stroke-width: 1;
+}
+
+.dial__tick--hour {
+  stroke: rgba(214, 246, 255, 0.7);
+  stroke-width: 1.2;
+}
+
+.dial__tick--cardinal {
+  stroke: rgba(232, 252, 255, 0.95);
+  stroke-width: 1.5;
+}
+
+.dial__hands {
+  filter: drop-shadow(0 0 7px rgba(92, 234, 255, 0.45));
+}
+
+.dial__hand {
+  transform-box: view-box;
+  transform-origin: 100px 100px;
+}
+
+.dial__hand line {
+  stroke: #d9f7ff;
+  stroke-linecap: round;
+}
+
+.dial__hand--hour line {
+  stroke-width: 3.4;
+}
+
+.dial__hand--minute line {
+  stroke-width: 2.2;
+}
+
+.dial__hand--hour {
+  animation: dial-spin 43200s linear infinite;
+  animation-delay: calc(var(--hour-delay) * 1s);
+}
+
+.dial__hand--minute {
+  animation: dial-spin 3600s linear infinite;
+  animation-delay: calc(var(--minute-delay) * 1s);
+}
+
+@keyframes dial-spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* The one warm accent — echoes the sparks trailing under the carriages */
+.dial__cap {
+  fill: #ffb765;
+  filter: drop-shadow(0 0 5px rgba(255, 183, 101, 0.55));
+}
+
+/* Readout */
+.clock__time {
+  font-family: 'SpaceMono', ui-monospace, monospace;
+  font-weight: 400;
+  font-size: 21px;
+  line-height: 1;
+  letter-spacing: 0.08em;
+  font-variant-numeric: tabular-nums;
+  color: #e6f7ff;
+  margin-top: 16px;
+  text-shadow:
+    0 0 16px rgba(92, 234, 255, 0.5),
+    0 2px 12px rgba(0, 0, 0, 0.7);
+}
+
+.clock__date {
+  font-family: 'SpaceMono', ui-monospace, monospace;
+  font-weight: 400;
+  margin-top: 9px;
+  font-size: 10px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: rgba(214, 246, 255, 0.5);
+  white-space: nowrap;
+  text-shadow:
+    0 0 10px rgba(92, 234, 255, 0.25),
+    0 1px 8px rgba(0, 0, 0, 0.7);
+}

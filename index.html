@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Express Crew</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+
+  <body>
+    <!-- Video background layer -->
+    <div class="video-background" aria-hidden="true">
+      <video
+        id="bg-video"
+        loop
+        autoplay
+        playsinline
+        preload="auto"
+      >
+        <source src="assets/astral-express-honkai-star-rail-moewalls-com.mp4" type="video/mp4" />
+      </video>
+    </div>
+
+    <!-- Clock overlay layer -->
+    <div class="clock-container">
+      <div class="clock" role="timer" aria-label="Current time">
+        <div class="clock__overline">Astral Express</div>
+
+        <!-- Hairline dial: hands rotate via CSS, phase-locked to the real clock -->
+        <svg
+          class="dial"
+          id="dial"
+          viewBox="0 0 200 200"
+          aria-hidden="true"
+          focusable="false"
+        >
+          <circle class="dial__ring" cx="100" cy="100" r="92" />
+          <g class="dial__ticks" id="dial-ticks"></g>
+          <g class="dial__hands">
+            <g class="dial__hand dial__hand--hour">
+              <line x1="100" y1="109" x2="100" y2="54" />
+            </g>
+            <g class="dial__hand dial__hand--minute">
+              <line x1="100" y1="112" x2="100" y2="30" />
+            </g>
+          </g>
+          <circle class="dial__cap" cx="100" cy="100" r="2.6" />
+        </svg>
+
+        <div class="clock__time" id="clock-time">--:--</div>
+        <div class="clock__date" id="clock-date">---</div>
+      </div>
+    </div>
+
+    <script src="js/index.js"></script>
+  </body>
+</html>

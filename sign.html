@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Express Crew — Station Sign</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/variants.css" />
+  </head>
+
+  <body data-variant="sign">
+    <!-- Video background layer -->
+    <div class="video-background" aria-hidden="true">
+      <video
+        id="bg-video"
+        loop
+        autoplay
+        playsinline
+        preload="auto"
+      >
+        <source src="assets/astral-express-honkai-star-rail-moewalls-com.mp4" type="video/mp4" />
+      </video>
+    </div>
+
+    <!-- Clock overlay layer -->
+    <div class="clock-container">
+      <div class="sign" role="timer" aria-label="Current time">
+        <div class="sign__name">Astral Express</div>
+        <div class="sign__rule"></div>
+        <div class="sign__time" id="sign-time">--:--</div>
+        <div class="sign__foot">
+          <span id="sign-date">---</span>
+        </div>
+        <div class="sign__loc">
+          <span class="sign__loclabel">Current position</span>
+          <span class="sign__locval"><i class="sign__dot"></i>Cosmos</span>
+        </div>
+      </div>
+    </div>
+
+    <script src="js/variants.js"></script>
+  </body>
+</html>

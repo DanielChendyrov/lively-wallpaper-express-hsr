@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Express Crew — Departure Board</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/variants.css" />
+  </head>
+
+  <body data-variant="board">
+    <!-- Video background layer -->
+    <div class="video-background" aria-hidden="true">
+      <video
+        id="bg-video"
+        loop
+        autoplay
+        playsinline
+        preload="auto"
+      >
+        <source src="assets/astral-express-honkai-star-rail-moewalls-com.mp4" type="video/mp4" />
+      </video>
+    </div>
+
+    <!-- Clock overlay layer -->
+    <div class="clock-container">
+      <div class="board" role="timer" aria-label="Current time">
+        <div class="board__row">
+          <span class="board__name">Astral Express</span>
+          <span class="board__status"><i class="board__dot"></i>Departed</span>
+        </div>
+
+        <div class="board__rule"></div>
+
+        <div class="board__row">
+          <span class="board__time" id="board-time">--:--</span>
+          <span class="board__meta">
+            <span class="board__label">Departs</span>
+            <span class="board__dest">Trailblaze</span>
+          </span>
+        </div>
+
+        <div class="board__rule"></div>
+
+        <div class="board__row">
+          <span class="board__date" id="board-date">---</span>
+          <span class="board__label">Platform <b class="board__inf">∞</b></span>
+        </div>
+      </div>
+    </div>
+
+    <script src="js/variants.js"></script>
+  </body>
+</html>

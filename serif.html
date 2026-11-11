@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Express Crew — Serif Numerals</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/variants.css" />
+  </head>
+
+  <body data-variant="serif">
+    <!-- Video background layer -->
+    <div class="video-background" aria-hidden="true">
+      <video
+        id="bg-video"
+        loop
+        autoplay
+        playsinline
+        preload="auto"
+      >
+        <source src="assets/astral-express-honkai-star-rail-moewalls-com.mp4" type="video/mp4" />
+      </video>
+    </div>
+
+    <!-- Clock overlay layer -->
+    <div class="clock-container">
+      <div class="serif" role="timer" aria-label="Current time">
+        <div class="serif__time" id="serif-time">--:--</div>
+        <div class="serif__date" id="serif-date">---</div>
+      </div>
+    </div>
+
+    <script src="js/variants.js"></script>
+  </body>
+</html>
